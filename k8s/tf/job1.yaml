@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: tf-job-0
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      runtimeClassName: nvidia
+      containers:
+      - name: hello
+        image: nvidia/cuda:11.0.3-base-ubuntu20.04
+        command: ["nvidia-smi"]
+        env:
+        - name: TF_CONFIG
+          value: '{"cluster":{"worker":["tf-job-0:3333","keras-with-strategy-worker-1:3333","keras-with-strategy-worker-2:3333"]},"task":{"index":0,"type":"worker"}}'
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+      restartPolicy: Never
