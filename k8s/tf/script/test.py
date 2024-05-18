@@ -4,6 +4,7 @@ import tensorflow as tf
 import os
 import json
 
+print(tf.config.list_physical_devices('GPU'))
 strategy = tf.distribute.MirroredStrategy()
 global_batch_size = 100
 with strategy.scope():
