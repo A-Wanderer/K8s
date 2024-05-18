@@ -1,0 +1,20 @@
+apiVersion: kubeflow.org/v1
+kind: TFJob
+metadata:
+  name: tfjob-test
+  namespace: kubeflow
+spec:
+  tfReplicaSpecs:
+    Worker:
+      replicas: 2
+      restartPolicy: OnFailure
+      template:
+        spec:
+          runtimeClassName: nvidia
+          containers:
+          - name: tensorflow
+            image: tensorflow/tensorflow:latest-gpu
+            args:
+            - /bin/bash
+            - -c
+            - apt-get update -y && apt-get install git -y && git clone https://github.com/A-Wanderer/K8s.git && bash K8s/k8s/tf/mul_script/start.sh
