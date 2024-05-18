@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: load-balancer-worker-0
+spec:
+  type: LoadBalancer
+  selector:
+    job-name: worker-0
+  ports:
+  - port: 3333
