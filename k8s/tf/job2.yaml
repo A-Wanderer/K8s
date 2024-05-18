@@ -3,10 +3,12 @@ kind: Job
 metadata:
   name: worker-0
 spec:
-  ttlSecondsAfterFinished: 100
+  # 不设置自动清理 ttlSecondsAfterFinished: 100
+  backoffLimit: 1  # 设置重试次数为1
   template:
     spec:
       runtimeClassName: nvidia
+      restartPolicy: OnFailure  # 确保在任务失败后不关闭Pod
       containers:
       - name: worker-container-0
         image: tensorflow/tensorflow:latest-gpu
