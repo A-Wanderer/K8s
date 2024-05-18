@@ -16,7 +16,7 @@ spec:
         - apt-get update -y && apt-get install git -y && git clone https://github.com/A-Wanderer/K8s.git && bash K8s/k8s/tf/script/start.sh
         env:
         - name: TF_CONFIG
-          value: '{"cluster": { "worker": ["localhost:3333"] }, "task": {"type": "worker", "index": 0} } }'
+          value: '{"cluster": { "worker": ["localhost:3333"] }, "task": {"type": "worker", "index": 0} }'
         resources:
           limits:
             nvidia.com/gpu: 1
